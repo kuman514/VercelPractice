@@ -7,8 +7,9 @@ const TodoList = (props, targetElement = null) => {
     }
   */
 
+  const rootElement = targetElement ?? document.createElement('ul');
+
   const render = () => {
-    const rootElement = targetElement ?? document.createElement('ul');
     while (rootElement.firstChild) {
       rootElement.removeChild(rootElement.firstChild);
     }

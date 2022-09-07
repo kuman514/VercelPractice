@@ -17,8 +17,9 @@ const TodoItem = (props, targetElement = null) => {
     render();
   };
 
+  const rootElement = targetElement ?? document.createElement('li');
+
   const render = () => {
-    const rootElement = targetElement ?? document.createElement('li');
     while (rootElement.firstChild) {
       rootElement.removeChild(rootElement.firstChild);
     }

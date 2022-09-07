@@ -7,7 +7,6 @@ const App = () => {
       'test4': 'test mock todo 4',
       'test5': 'test mock todo 5',
     },
-    todoText: '',
   };
 
   const setState = (newState) => {
@@ -21,8 +20,9 @@ const App = () => {
     render();
   };
 
+  const rootElement = document.createElement('div');
+
   const render = () => {
-    const rootElement = document.createElement('div');
     while (rootElement.firstChild) {
       rootElement.removeChild(rootElement.firstChild);
     }
@@ -43,6 +43,14 @@ const App = () => {
     }, document.createElement('ul')));
 
     // Render TodoInput
+    rootElement.appendChild(TodoInput({
+      onCreate: (newValue) => {
+        const newTodos = structuredClone(state.todos);
+        newTodos[`Todo-${Date.now()}`] = newValue;
+        console.log(newTodos);
+        setState({ todos: newTodos });
+      },
+    }));
 
     return rootElement;
   };

@@ -14,10 +14,10 @@ const TodoList = (props, targetElement = null) => {
     }
 
     Object.entries(props.todos).forEach(([key, value]) => {
-      const todoItem = document.createElement('li');
-      todoItem.id = key;
-      todoItem.textContent = value;
-      rootElement.appendChild(todoItem);
+      rootElement.appendChild(TodoItem({
+        todoId: key,
+        text: value,
+      }));
     });
 
     return rootElement;

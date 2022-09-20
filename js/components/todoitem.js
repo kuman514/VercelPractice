@@ -3,6 +3,8 @@ const TodoItem = (props, targetElement = null) => {
     props: {
       todoId: string;
       text: string;
+      onModify: (key: string, newValue: string) => void;
+      onDelete: (key: string) => void;
     }
   */
 
@@ -26,6 +28,11 @@ const TodoItem = (props, targetElement = null) => {
 
     rootElement.id = props.todoId;
     rootElement.textContent = props.text;
+
+    const deleteButton = document.createElement('button');
+    deleteButton.addEventListener('click', () => { props.onDelete(props.todoId) });
+    deleteButton.textContent = 'Delete';
+    rootElement.appendChild(deleteButton);
 
     return rootElement;
   };

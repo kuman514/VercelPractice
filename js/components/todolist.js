@@ -18,6 +18,8 @@ const TodoList = (props, targetElement = null) => {
       rootElement.appendChild(TodoItem({
         todoId: key,
         text: value,
+        onModify: props.onModify,
+        onDelete: props.onDelete,
       }));
     });
 

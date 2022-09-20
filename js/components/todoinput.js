@@ -1,4 +1,4 @@
-const TodoInput = (props) => {
+const TodoInput = (props, targetElement = null) => {
   /*
     props: {
       onCreate: (newValue: string) => void;
@@ -16,8 +16,9 @@ const TodoInput = (props) => {
     textInput.value = '';
   });
 
+  const rootElement = targetElement ?? document.createElement('div');
+
   const render = () => {
-    const rootElement = document.createElement('div');
     while (rootElement.firstChild) {
       rootElement.removeChild(rootElement.firstChild);
     }

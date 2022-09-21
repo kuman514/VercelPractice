@@ -8,6 +8,10 @@ const TodoItem = (props, targetElement = null) => {
     }
   */
 
+  const state = {
+    isModifyMode: false,
+  };
+
   const setState = (newState) => {
     let changed = false;
     Object.entries(newState).forEach(([key, value]) => {
@@ -19,6 +23,10 @@ const TodoItem = (props, targetElement = null) => {
     render();
   };
 
+  const setIsModifyMode = (newIsModifyMode) => {
+    setState({ isModifyMode: newIsModifyMode });
+  };
+
   const rootElement = targetElement ?? document.createElement('li');
 
   const render = () => {
@@ -27,12 +35,37 @@ const TodoItem = (props, targetElement = null) => {
     }
 
     rootElement.id = props.todoId;
-    rootElement.textContent = props.text;
 
-    const deleteButton = document.createElement('button');
-    deleteButton.addEventListener('click', () => { props.onDelete(props.todoId) });
-    deleteButton.textContent = 'Delete';
-    rootElement.appendChild(deleteButton);
+    if (state.isModifyMode) {
+      const modifyInput = document.createElement('input');
+      modifyInput.value = props.text;
+      rootElement.appendChild(modifyInput);
+
+      const confirmButton = document.createElement('button');
+      confirmButton.addEventListener('click', () => {
+        props.onModify(props.todoId, modifyInput.value);
+        setIsModifyMode(false);
+      });
+      confirmButton.textContent = 'Confirm Modify';
+      rootElement.appendChild(confirmButton);
+
+      const cancelButton = document.createElement('button');
+      cancelButton.addEventListener('click', () => { setIsModifyMode(false); });
+      cancelButton.textContent = 'Cancel';
+      rootElement.appendChild(cancelButton);
+    } else {
+      rootElement.textContent = props.text;
+
+      const modifyButton = document.createElement('button');
+      modifyButton.addEventListener('click', () => { setIsModifyMode(true); });
+      modifyButton.textContent = 'Modify';
+      rootElement.appendChild(modifyButton);
+
+      const deleteButton = document.createElement('button');
+      deleteButton.addEventListener('click', () => { props.onDelete(props.todoId); });
+      deleteButton.textContent = 'Delete';
+      rootElement.appendChild(deleteButton);
+    }
 
     return rootElement;
   };

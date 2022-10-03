@@ -10,6 +10,7 @@ https://vercel-practice-kuman514.vercel.app/
 ## Deploy log (배포 기록)
 - Sep 03 2022: 최초 테스트용 배포
 - Sep 04 2022: 자바스크립트 동작 테스트 배포
+- Sep 21 2022: CRUD 동작 완료 배포
 
 ## Convention (규칙)
 - 함수는 특별한 경우(예: `.bind(this)`가 필요한 경우)가 아니면 반드시 화살표 함수를 사용한다.
